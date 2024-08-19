@@ -1,0 +1,48 @@
+digraph SRMS_to_Users {
+    // Define graph properties
+    node [shape=rectangle, style=filled, fillcolor=lightblue, fontname="Helvetica", fontsize=10];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Main system
+    SRMS [label="Student Result Management System", shape=ellipse, style=bold, fillcolor=lightyellow];
+
+    // User nodes
+    Students [label="Students", shape=ellipse, fillcolor=pink];
+    Teachers [label="Teachers", shape=ellipse, fillcolor=pink];
+    Admins [label="Administrators", shape=ellipse, fillcolor=pink];
+
+    // key system components
+    Login [label="Login/Logout" , fillcolor=lavender];
+    InputResults [label="Input/Update Results", fillcolor=lavender];
+   
+    ViewResults [label="View Results", fillcolor=lavender];
+    GenerateReports [label="Generate Reports", fillcolor=lavender];
+    DownloadReports [label="Download Reports", fillcolor=lavender];
+    MaintainAccounts [label="Maintain user accounts", fillcolor=lavender];
+    ManageNots [label="Manage notifications", fillcolor=lavender];
+    HelpSupport [label="Help & Support", fillcolor=lavender];
+
+    // Connections from SRMS to Users
+    SRMS -> Students ;
+    SRMS -> Teachers ;
+    SRMS -> Admins ;
+
+
+    // User-specific interactions
+    Students -> Login [color=blue];
+    Students -> ViewResults[color=blue];
+    Students -> DownloadReports[color=blue];
+
+    Teachers -> Login [color=magenta];
+    Teachers -> InputResults [color=magenta];
+    Teachers -> ViewResults [color=magenta];
+    Teachers -> DownloadReports [color=magenta];
+
+
+    Admins -> MaintainAccounts [color=purple];
+    Admins -> GenerateReports [color=purple];
+    Admins -> HelpSupport [color=purple];
+    Admins -> ManageNots [color=purple];
+
+}
+
