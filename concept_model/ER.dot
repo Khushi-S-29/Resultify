@@ -1,0 +1,99 @@
+digraph ER_Diagram {
+    
+    node [shape=rect, color=black, fontname=Arial, fontsize=10];
+    edge [fontsize=10, fontname=Arial, color=black];
+
+    // User Entity
+    User [label="User"];
+    user_has [label="HAS A" shape=diamond, style=filled, fillcolor=lightgrey];
+    user_id [label="user_id" shape=rect];
+    password [label="Password" shape=rect];
+
+    // Admin Entity
+    Admin [label="Admin"];
+    admin_has [label="HAS A" shape=diamond, style=filled, fillcolor=lightgrey];
+    admin_id [label="Admin ID" shape=rect];
+    admin_name [label="Name" shape=rect];
+    admin_email [label="Email" shape=rect];
+    admin_phone [label="Phone" shape=rect];
+
+    // Teacher Entity
+    Teacher [label="Teacher"];
+    teacher_has [label="HAS A" shape=diamond, style=filled, fillcolor=lightgrey];
+    teacher_id [label="Teacher ID" shape=rect];
+    teacher_name [label="Name" shape=rect];
+    teacher_email [label="Email" shape=rect];
+    teacher_phone [label="Phone" shape=rect];
+
+    // Student Entity
+    Student [label="Student"];
+    student_has [label="HAS A" shape=diamond, style=filled, fillcolor=lightgrey];
+    student_id [label="Student ID" shape=rect];
+    student_name [label="Name" shape=rect];
+    student_dob [label="DOB" shape=rect];
+    student_email [label="Email" shape=rect];
+    student_phone [label="Phone" shape=rect];
+    student_address [label="Address" shape=rect];
+
+    // Subject Entity
+    Subject [label="Subject"];
+    subject_id [label="Subject ID" shape=rect];
+    subject_name [label="Subject Name" shape=rect];
+    max_marks [label="Max Marks" shape=rect];
+    pass_marks [label="Pass Marks" shape=rect];
+
+    // Result Entity
+    Result [label="Result"];
+    result_id [label="Result ID" shape=rect];
+    marks_obtained [label="Marks Obtained" shape=rect];
+    grade [label="Grade" shape=rect];
+    remarks [label="Remarks" shape=rect];
+    result_student_id [label="Student ID" shape=rect];
+    result_subject_id [label="Subject ID" shape=rect];
+
+    // Connections and Relationships
+    User -> user_has;
+    user_has -> user_id;
+    user_has -> password;
+
+    Admin -> admin_has;
+    admin_has -> admin_id;
+    admin_has -> admin_name;
+    admin_has -> admin_email;
+    admin_has -> admin_phone;
+
+    Teacher -> teacher_has;
+    teacher_has -> teacher_id;
+    teacher_has -> teacher_name;
+    teacher_has -> teacher_email;
+    teacher_has -> teacher_phone;
+
+    Student -> student_has;
+    student_has -> student_id;
+    student_has -> student_name;
+    student_has -> student_email;
+    student_has -> student_phone;
+    student_has -> student_address;
+
+    Subject -> subject_id;
+    Subject -> subject_name;
+    Subject -> max_marks;
+    Subject -> pass_marks;
+
+    Result -> result_id;
+    Result -> marks_obtained;
+    Result -> grade;
+    Result -> remarks;
+    Result -> result_student_id;
+    Result -> result_subject_id;
+
+    // Relationships
+    User -> Admin [label="ISA" weight=1];
+    User -> Teacher [label="ISA" weight=1];
+    User -> Student [label="ISA" weight=1];
+
+    Student -> Result [label="Has" weight=1];
+    Subject -> Result [label="Graded In" weight=1];
+    Student -> Subject [label="Takes" weight=1];
+    Teacher -> Subject [label="Teaches" weight=1];
+}

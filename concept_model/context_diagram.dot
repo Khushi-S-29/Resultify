@@ -1,0 +1,28 @@
+digraph SRMS_Context {
+    // Define node styles
+    node [shape=ellipse, style=filled, fillcolor=lightyellow, fontname=Helvetica, fontsize=12];
+
+    // External Entities
+    Student [label="Student"];
+    Teacher [label="Teacher"];
+    Admin [label="Admin"];
+    Database [label="Database", shape=cylinder, fillcolor=lightgrey];
+
+    // SRMS System
+    SRMS [label="Student Result Management System", shape=box, style=filled, fillcolor=lightblue, fontsize=14];
+
+    // Interactions with SRMS (Colored text)
+    Student -> SRMS [label="View Results\nRequest Re-evaluation\nAccess Exam Schedule\nView Notifications", fontcolor=blue];
+    Teacher -> SRMS [label="Enter/Edit Grades\nUpload Results\nManage Assignments\nView Student Performance", fontcolor=blue];
+    Admin -> SRMS [label="Manage Users\nConfigure System\nGenerate Reports\nMonitor System Activity", fontcolor=blue];
+    SRMS -> Database [label="Store/Retrieve Data", dir=both, fontcolor=blue];
+
+    // SRMS Responses (Different color for replies)
+    SRMS -> Student [label="Provide Results\nSend Notifications\nDisplay Exam Schedule", fontcolor=brown];
+    SRMS -> Teacher [label="Provide Access to Grades\nGenerate Performance Reports", fontcolor=brown];
+    SRMS -> Admin [label="Provide User Logs\nGenerate System Reports", fontcolor=brown];
+
+    // Node positioning for clarity
+    {rank=source; Student; Teacher; Admin}
+    {rank=sink; Database}
+}

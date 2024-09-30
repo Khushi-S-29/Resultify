@@ -1,0 +1,37 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_1 {
+    label="Level 2 DFD - Submit Exam Scores (1.1)";
+    color=lightgrey;
+
+    // External Entities
+    Admin [label="Admin" shape=ellipse style=filled color=lightyellow];
+
+    // Level 2 Processes
+    Process1 [label="1.1.1 Validate Student Information" shape=box3d style=filled color=lightgreen];
+    Process2 [label="1.1.2 Enter Exam Scores" shape=box3d style=filled color=lightgreen];
+    Process3 [label="1.1.3 Calculate Grades" shape=box3d style=filled color=lightgreen];
+    Process4 [label="1.1.4 Store Results" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Student Database" shape=cylinder style=filled color=lightcoral];
+    DataStore2 [label="Result Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows
+    Admin -> Process1 [label="Submit Student ID"];
+    Process1 -> DataStore1 [label="Verify Student Info"];
+    DataStore1 -> Process1 [label="Student Info"];
+    Process1 -> Process2 [label="Validated Student"];
+
+    Admin -> Process2 [label="Input Exam Scores"];
+    Process2 -> Process3 [label="Submit Scores"];
+
+    Process3 -> DataStore2 [label="Store Calculated Grades"];
+    DataStore2 -> Process4 [label="Fetch Grades"];
+    Process4 -> DataStore2 [label="Save Final Results"];
+  }
+}

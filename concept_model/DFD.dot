@@ -1,0 +1,49 @@
+digraph SRMS {
+    node [shape=ellipse, style=solid, fontname="Arial", fontsize=10];
+    edge [fontname="Arial", fontsize=9];
+
+    // Nodes
+    login [label="Login"];
+    user_account_management [label="User account\nmanagement"];
+    subject_info_management [label="Subject info\nmanagement"];
+    student_info_management [label="Student info\nmanagement"];
+    marks_info_management [label="Marks info\nmanagement"];
+    report_generation [label="Report\ngeneration"];
+
+    // User Roles
+    data_entry_operator [label="Data entry\noperator", shape=plaintext];
+    teacher [label="Teacher", shape=plaintext];
+    administrator [label="Administrator", shape=plaintext];
+
+    // Edges for Login
+    data_entry_operator -> login [label="Enter user_name,\nPassword"];
+    teacher -> login [label="Enter user_name,\nPassword"];
+    administrator -> login [label="Enter user_name,\nPassword"];
+
+    // Edges for Subject Info Management
+    login -> subject_info_management [label="Subject info entry"];
+    subject_info_management -> student_info_management [label="Subject details"];
+
+    // Edges for Student Info Management
+    login -> student_info_management [label="Student info entry"];
+    teacher -> student_info_management [label="Update student's\nmarks"];
+    student_info_management -> marks_info_management [label="Student details"];
+
+    // Edges for Marks Info Management
+    teacher -> marks_info_management [label="Update student's\nmarks"];
+    marks_info_management -> marks_info_management [label="Marks details"];
+    marks_info_management -> report_generation [label="Student performance\nreport"];
+
+    // Edges for Report Generation
+    report_generation -> administrator [label="Student performance\nreport"];
+    
+    // Edges for User Account Management
+    administrator -> user_account_management [label="User info entry"];
+    user_account_management -> login [label="User account\ninfo"];
+
+    // Administrator Additional Connections
+    administrator -> report_generation [label="Generate report"];
+    administrator -> marks_info_management [label="Review marks\nand reports"];
+    administrator -> student_info_management [label="Manage student\nrecords"];
+}
+

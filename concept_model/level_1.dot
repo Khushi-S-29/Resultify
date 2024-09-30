@@ -1,0 +1,47 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_0 {
+    label="Level 1 DFD - Student Result Management System";
+    color=lightgrey;
+
+    // External Entities
+    Student [label="Student" shape=ellipse style=filled color=lightyellow];
+    Admin [label="Admin" shape=ellipse style=filled color=lightyellow];
+
+    // Level 1 Processes
+    Process0 [label="Login/Authenticate" shape=box3d style=filled color=lightgreen];
+    Process1 [label="Submit Exam Scores" shape=box3d style=filled color=lightgreen];
+    Process2 [label="View Results" shape=box3d style=filled color=lightgreen];
+    Process3 [label="Manage Results" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Student Database" shape=cylinder style=filled color=lightcoral];
+    DataStore2 [label="Result Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows for Login
+    Student -> Process0 [label="Login Request"];
+    Admin -> Process0 [label="Login Request"];
+    Process0 -> Student [label="Authentication Status"];
+    Process0 -> Admin [label="Authentication Status"];
+    Process0 -> DataStore1 [label="Validate Credentials"];
+
+    // Data Flows for Student Processes
+    Student -> Process2 [label="Request Results"];
+    Process2 -> DataStore2 [label="Access Results"];
+    DataStore2 -> Process2 [label="Return Results"];
+    Process2 -> Student [label="Display Results"];
+
+    // Data Flows for Admin Processes
+    Admin -> Process1 [label="Input Scores"];
+    Process1 -> DataStore1 [label="Store Student Info"];
+    Process1 -> DataStore2 [label="Store Exam Scores"];
+    
+    Admin -> Process3 [label="Manage Results"];
+    Process3 -> DataStore2 [label="Update/Delete Results"];
+    DataStore2 -> Process3 [label="Fetch Results"];
+  }
+}

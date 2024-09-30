@@ -1,0 +1,46 @@
+digraph SRMS_Level2 {
+    // Define node styles
+    node [shape=box, style=filled, fillcolor=lightblue, fontname=Helvetica, fontsize=12];
+    
+    // Define sub-processes
+    ViewResults [label="View Results"];
+    GradeManagement [label="Grade Management"];
+    UserManagement [label="User Management"];
+    NotificationSystem [label="Notification System"];
+    ExamScheduling [label="Exam Scheduling"];
+    
+    // External Entities
+    Student [label="Student", shape=ellipse, fillcolor=lightyellow];
+    Teacher [label="Teacher", shape=ellipse, fillcolor=lightyellow];
+    Admin [label="Admin", shape=ellipse, fillcolor=lightyellow];
+    Database [label="Database", shape=cylinder, fillcolor=lightgrey];
+
+    // Define interactions between processes
+    Student -> ViewResults [label="Request Results"];
+    Teacher -> GradeManagement [label="Submit Grades"];
+    Teacher -> ExamScheduling [label="Update Exam Schedules"];
+    Admin -> UserManagement [label="Manage Users"];
+    Admin -> NotificationSystem [label="Send Notifications"];
+
+    // Define interactions between processes and database
+    ViewResults -> Database [label="Retrieve Results"];
+    GradeManagement -> Database [label="Update Grades"];
+    UserManagement -> Database [label="Manage User Data"];
+    NotificationSystem -> Database [label="Fetch Notifications Data"];
+    ExamScheduling -> Database [label="Update Exam Data"];
+    
+    // Define responses from processes to external entities
+    ViewResults -> Student [label="Display Results"];
+    GradeManagement -> Teacher [label="Grade Confirmation"];
+    NotificationSystem -> Admin [label="Notification Alerts"];
+    UserManagement -> Admin [label="User Management Reports"];
+    ExamScheduling -> Teacher [label="Exam Schedule Updates"];
+
+    // Define process interactions
+    ViewResults -> NotificationSystem [label="Send Result Notifications"];
+    GradeManagement -> NotificationSystem [label="Notify Grade Updates"];
+    
+    // Node positioning for clarity
+    {rank=source; Student; Teacher; Admin}
+    {rank=sink; Database}
+}

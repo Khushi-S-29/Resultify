@@ -1,0 +1,31 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_2 {
+    label="Level 2 DFD - View Results (1.2)";
+    color=lightgrey;
+
+    // External Entities
+    Student [label="Student" shape=ellipse style=filled color=lightyellow];
+
+    // Level 2 Processes
+    Process1 [label="1.2.1 Request Results" shape=box3d style=filled color=lightgreen];
+    Process2 [label="1.2.2 Validate Request" shape=box3d style=filled color=lightgreen];
+    Process3 [label="1.2.3 Retrieve Results" shape=box3d style=filled color=lightgreen];
+    Process4 [label="1.2.4 Display Results" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Result Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows
+    Student -> Process1 [label="Request Results"];
+    Process1 -> Process2 [label="Submit Request"];
+    Process2 -> DataStore1 [label="Fetch Results"];
+    DataStore1 -> Process3 [label="Retrieve Results"];
+    Process3 -> Process4 [label="Processed Results"];
+    Process4 -> Student [label="Display Results"];
+  }
+}

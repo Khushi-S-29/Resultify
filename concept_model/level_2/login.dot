@@ -1,0 +1,35 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_0 {
+    label="Level 2 DFD - Login/Authenticate (1.0)";
+    color=lightgrey;
+
+    // External Entities
+    Student [label="Student" shape=ellipse style=filled color=lightyellow];
+    Admin [label="Admin" shape=ellipse style=filled color=lightyellow];
+
+    // Level 2 Processes
+    Process1 [label="1.0.1 Validate User Input" shape=box3d style=filled color=lightgreen];
+    Process2 [label="1.0.2 Check Credentials" shape=box3d style=filled color=lightgreen];
+    Process3 [label="1.0.3 Return Authentication Status" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Student Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows for Login
+    Student -> Process1 [label="Enter Credentials"];
+    Admin -> Process1 [label="Enter Credentials"];
+
+    Process1 -> Process2 [label="Validated Input"];
+    Process2 -> DataStore1 [label="Access User Credentials"];
+    DataStore1 -> Process2 [label="Fetch Credentials"];
+    
+    Process2 -> Process3 [label="Authentication Result"];
+    Process3 -> Student [label="Return Status"];
+    Process3 -> Admin [label="Return Status"];
+  }
+}

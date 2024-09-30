@@ -1,0 +1,47 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_0 {
+    label="Level 0 DFD - Student Result Management System";
+    color=lightgrey;
+
+    // External Entities
+    Student [label="Student" shape=ellipse style=filled color=lightyellow];
+    Admin [label="Admin" shape=ellipse style=filled color=lightyellow];
+    Teacher [label="Teacher" shape=ellipse style=filled color=lightyellow];
+
+    // Main System Process
+    Process0 [label="Student Result Management System" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Student Database" shape=cylinder style=filled color=lightcoral];
+    DataStore2 [label="Result Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows for Student
+    Student -> Process0 [label="Request to View Results"];
+    Process0 -> Student [label="Display Results"];
+
+    // Data Flows for Teacher
+    Teacher -> Process0 [label="Submit/Update Scores"];
+    Process0 -> Teacher [label="Manage Scores Status"];
+
+    // Data Flows for Admin
+    Admin -> Process0 [label="Submit/Update Scores and Manage Data"];
+    Process0 -> Admin [label="Manage Results Status"];
+
+    // System Interaction with Databases
+    Process0 -> DataStore1 [label="Fetch/Store Student and Teacher Data"];
+    DataStore1 -> Process0 [label="Provide User Info"];
+    
+    Process0 -> DataStore2 [label="Fetch/Store Exam Results"];
+    DataStore2 -> Process0 [label="Provide Exam Results"];
+
+    // Login Process (common for all users)
+    Student -> Process0 [label="Login"];
+    Teacher -> Process0 [label="Login"];
+    Admin -> Process0 [label="Login"];
+  }
+}

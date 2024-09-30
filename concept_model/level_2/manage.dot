@@ -1,0 +1,35 @@
+digraph G {
+  rankdir=LR;
+
+  // Defining nodes
+  node [shape=box, style=rounded, color=lightblue, fontname=Helvetica];
+
+  subgraph cluster_3 {
+    label="Level 2 DFD - Manage Results (1.3)";
+    color=lightgrey;
+
+    // External Entities
+    Admin [label="Admin" shape=ellipse style=filled color=lightyellow];
+
+    // Level 2 Processes
+    Process1 [label="1.3.1 Update Exam Scores" shape=box3d style=filled color=lightgreen];
+    Process2 [label="1.3.2 Delete Results" shape=box3d style=filled color=lightgreen];
+    Process3 [label="1.3.3 Generate Reports" shape=box3d style=filled color=lightgreen];
+
+    // Data Stores
+    DataStore1 [label="Result Database" shape=cylinder style=filled color=lightcoral];
+    DataStore2 [label="Student Database" shape=cylinder style=filled color=lightcoral];
+
+    // Data Flows
+    Admin -> Process1 [label="Update Scores"];
+    Process1 -> DataStore1 [label="Store Updated Scores"];
+
+    Admin -> Process2 [label="Delete Results"];
+    Process2 -> DataStore1 [label="Remove Records"];
+
+    Admin -> Process3 [label="Request Reports"];
+    Process3 -> DataStore1 [label="Fetch Result Data"];
+    Process3 -> DataStore2 [label="Fetch Student Data"];
+    Process3 -> Admin [label="Generate Reports"];
+  }
+}
